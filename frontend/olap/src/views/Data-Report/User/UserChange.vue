@@ -1,0 +1,22 @@
+<template>
+    <div>
+        <h1>用户变动统计</h1>
+    </div>
+</template>
+  
+<script>
+export default {
+    name: 'UserChange',
+    props: {
+    },
+    data() {
+    return {
+
+    }
+  }
+}
+</script>
+  
+  <!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped></style>
+  

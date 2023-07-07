@@ -2,14 +2,14 @@
   <div style="height: 100%;">
     <el-container style="height: 100%;">
       <!-- 顶部header -->
-      <el-header style="text-align: right; font-size: 12px; border-bottom: 1px solid #ccc; line-height: 60px;">
+      <el-header style="border-bottom: 1px solid #ccc; line-height: 60px;">
         <Header></Header>
       </el-header>
       <!-- 内容主体 -->
       <el-container style="height: calc(100% - 60px);">
         <!-- 左菜单导航栏 -->
         <el-aside width="200px" style="height: 100%;">
-          <Aside></Aside>
+          <AsideDataReport></AsideDataReport>
         </el-aside>
         <!-- 内容 -->
         <el-main>
@@ -23,13 +23,13 @@
 <script>
 // @ is an alias to /src
 import Header from '@/components/Header.vue'
-import Aside from '@/components/Aside.vue'
+import AsideDataReport from '@/components/AsideDataReport.vue'
 
 export default {
-  name: 'Manage',
+  name: 'Data-Report',
   components: {
     Header,
-    Aside
+    AsideDataReport
   },
   data() {
     // const item = {

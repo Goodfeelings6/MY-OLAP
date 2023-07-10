@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-menu :default-active="activeIndex" :default-openeds="['1']" 
+    <el-menu :default-active="activeIndex" :default-openeds="[]" 
       style="height: 100%;overflow-x: hidden;"
       router
       >
@@ -42,20 +42,20 @@
       </el-submenu>
       <el-submenu index="3">
         <template slot="title"><i class="el-icon-shopping-bag-1"></i>商品分析</template>
-        <el-menu-item index="3-1" class="el-icon-link">复购率统计</el-menu-item>
+        <el-menu-item index="/data-report/shop/" class="el-icon-link">复购率统计</el-menu-item>
         <el-menu-item-group>
           <template slot="title">品牌</template>
-          <el-menu-item index="3-2" class="el-icon-link">各品牌商品下单统计</el-menu-item>
-          <el-menu-item index="3-3" class="el-icon-link">各品牌商品退单统计</el-menu-item>
+          <el-menu-item index="/data-report/shop/BrandAddOrder" class="el-icon-link">各品牌商品下单统计</el-menu-item>
+          <el-menu-item index="/data-report/shop/BrandReduceOrder" class="el-icon-link">各品牌商品退单统计</el-menu-item>
         </el-menu-item-group>
         <el-menu-item-group title="品类">
-          <el-menu-item index="3-4" class="el-icon-link">各品类商品下单统计</el-menu-item>
-          <el-menu-item index="3-5" class="el-icon-link">各品类商品退单统计</el-menu-item>
+          <el-menu-item index="/data-report/shop/KindAddOrder" class="el-icon-link">各品类商品下单统计</el-menu-item>
+          <el-menu-item index="/data-report/shop/KindReduceOrder" class="el-icon-link">各品类商品退单统计</el-menu-item>
         </el-menu-item-group>
         <el-menu-item-group title="其他">
-          <el-menu-item index="3-6" class="el-icon-link">SPU订单统计</el-menu-item>
-          <el-menu-item index="3-7" class="el-icon-link">购物车存量统计</el-menu-item>
-          <el-menu-item index="3-8" class="el-icon-link">各省份交易统计</el-menu-item>
+          <el-menu-item index="/data-report/shop/" class="el-icon-link">SPU订单统计</el-menu-item>
+          <el-menu-item index="/data-report/shop/" class="el-icon-link">购物车存量统计</el-menu-item>
+          <el-menu-item index="/data-report/shop/Province" class="el-icon-link">各省份交易统计</el-menu-item>
         </el-menu-item-group>
         <!-- <el-submenu index="3-4">
           <template slot="title">选项4</template>

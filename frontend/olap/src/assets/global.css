@@ -5,3 +5,14 @@ html,body,div{
 html,body{
     height: 100%;
 }
+.fc{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.mb-10{
+    margin-bottom: 10px;
+}
+.mt-10{
+    margin-top: 10px;
+}

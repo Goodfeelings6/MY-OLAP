@@ -60,6 +60,7 @@ const routes = [
         // 报表 / 流量主题
         path: 'flow',
         name: 'Flow',
+        component: () => import('../views/Data-Report/Flow.vue'),
         redirect:'/data-report/flow/channel',
         children: [
           {
@@ -73,7 +74,60 @@ const routes = [
             component: () => import('../views/Data-Report/Flow/Flowpath.vue')
           }
         ]
-      } 
+      },
+      {
+        // 报表 / 商品主题
+        path: 'shop',
+        name: 'Shop',
+        component: () => import('../views/Data-Report/Shop.vue'),
+        redirect:'/data-report/shop/BrandAddOrder',
+        children: [
+          {
+            path: 'BrandAddOrder',
+            name: 'ShopBrandAddOrder',
+            component: () => import('../views/Data-Report/Shop/ShopBrandAddOrder.vue')
+          },
+          { 
+            path: 'BrandReduceOrder',
+            name: 'ShopBrandReduceOrder',
+            component: () => import('../views/Data-Report/Shop/ShopBrandReduceOrder.vue')
+          },
+          {
+            path: 'KindAddOrder',
+            name: 'ShopKindAddOrder',
+            component: () => import('../views/Data-Report/Shop/ShopKindAddOrder.vue')
+          },
+          { 
+            path: 'KindReduceOrder',
+            name: 'ShopKindReduceOrder',
+            component: () => import('../views/Data-Report/Shop/ShopKindReduceOrder.vue')
+          },
+          { 
+            path: 'Province',
+            name: 'ShopProvince',
+            component: () => import('../views/Data-Report/Shop/ShopProvince.vue')
+          }
+        ]
+      },
+      // {
+      //   // 报表 / 交易主题
+      //   path: 'order',
+      //   name: 'Order',
+      //   component: () => import('../views/Data-Report/Order.vue'),
+      //   redirect:'/data-report/order/',
+      //   children: [
+      //     {
+      //       path: '',
+      //       name: 'ShopBrandAddOrder',
+      //       component: () => import('../views/Data-Report/Shop/ShopBrandAddOrder.vue')
+      //     },
+      //     { 
+      //       path: '',
+      //       name: 'ShopBrandReduceOrder',
+      //       component: () => import('../views/Data-Report/Shop/ShopBrandReduceOrder.vue')
+      //     }
+      //   ]
+      // } 
     ]
   }
   // { 用户画像 

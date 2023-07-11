@@ -21,7 +21,7 @@ public class TradeStatsByTm {
     @TableField("order_count")
     private String orderCount;
 
-    @TableField("orderUserCount")
+    @TableField("order_user_count")
     private String orderUserCount;
 
     @TableField("order_refund_count")

@@ -25,7 +25,7 @@ public class TradeStatsByCate {
     @TableField("category2_name")
     private String category2Name;
 
-    @TableField("category3Id")
+    @TableField("category3_id")
     private String category3Id;
 
     @TableField("category3_name")

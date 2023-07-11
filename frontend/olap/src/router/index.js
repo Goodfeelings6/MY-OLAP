@@ -80,8 +80,13 @@ const routes = [
         path: 'shop',
         name: 'Shop',
         component: () => import('../views/Data-Report/Shop.vue'),
-        redirect:'/data-report/shop/BrandAddOrder',
+        redirect:'/data-report/shop/BrandRebuy',
         children: [
+          {
+            path: 'BrandRebuy',
+            name: 'ShopBrandRebuy',
+            component: () => import('../views/Data-Report/Shop/ShopBrandRebuy.vue')
+          },
           {
             path: 'BrandAddOrder',
             name: 'ShopBrandAddOrder',
@@ -109,25 +114,34 @@ const routes = [
           }
         ]
       },
-      // {
-      //   // 报表 / 交易主题
-      //   path: 'order',
-      //   name: 'Order',
-      //   component: () => import('../views/Data-Report/Order.vue'),
-      //   redirect:'/data-report/order/',
-      //   children: [
-      //     {
-      //       path: '',
-      //       name: 'ShopBrandAddOrder',
-      //       component: () => import('../views/Data-Report/Shop/ShopBrandAddOrder.vue')
-      //     },
-      //     { 
-      //       path: '',
-      //       name: 'ShopBrandReduceOrder',
-      //       component: () => import('../views/Data-Report/Shop/ShopBrandReduceOrder.vue')
-      //     }
-      //   ]
-      // } 
+      {
+        // 报表 / 优惠劵主题
+        path: 'coupon',
+        name: 'Coupon',
+        component: () => import('../views/Data-Report/Coupon.vue'),
+        redirect:'/data-report/coupon/Discount',
+        children: [
+          {
+            path: 'Discount',
+            name: 'CouponDiscount',
+            component: () => import('../views/Data-Report/Coupon/CouponDiscount.vue')
+          }
+        ]
+      } ,
+      {
+        // 报表 / 活动主题
+        path: 'activity',
+        name: 'Activity',
+        component: () => import('../views/Data-Report/Activity.vue'),
+        redirect:'/data-report/activity/Discount',
+        children: [
+          {
+            path: 'Discount',
+            name: 'ActivityDiscount',
+            component: () => import('../views/Data-Report/Activity/ActivityDiscount.vue')
+          }
+        ]
+      } 
     ]
   }
   // { 用户画像 

@@ -25,13 +25,13 @@ public class UserChangeServiceImpl extends ServiceImpl<UserChangeMapper, UserCha
         LocalDate date = LocalDate.parse(dt, formatter);
 
         // 进行日期运算
-        LocalDate newDate = date.minusDays(7); // 增加7天
+        LocalDate newDate = date.minusDays(7);
 
         // 格式化日期为字符串
         String newDateString = newDate.format(formatter);
 
         return userChangeMapper.selectList(new LambdaQueryWrapper<UserChange>()
-                .between(UserChange::getDt, newDateString, dt));
+                .gt(UserChange::getDt, newDateString).le(UserChange::getDt, dt));
     }
 
 }

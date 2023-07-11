@@ -1,6 +1,20 @@
 <template>
   <div style="display: flex;flex-direction: column; justify-content: center;align-items: center;height: 100%;">
     <!-- <h1>各省份交易统计</h1> -->
+    <div style="display: flex;justify-content: space-between;margin-top: 15px;margin-bottom: 30px">
+      <div class="fc" style="margin-right: 400px;">
+        <el-date-picker v-model="date1" type="date" value-format="yyyy-MM-dd" placeholder="选择日期"
+          :picker-options="pickerOptions" @change="checkout_date">
+        </el-date-picker>
+      </div>
+      <div class="fc">
+        <el-radio-group v-model="radio1" @change="checkout_scope">
+          <el-radio-button label="最近1天"></el-radio-button>
+          <el-radio-button label="最近7天"></el-radio-button>
+          <el-radio-button label="最近30天"></el-radio-button>
+        </el-radio-group>
+      </div>
+    </div>
     <el-row :gutter="20">
       <el-col :span="25">
         <el-card>
@@ -24,12 +38,15 @@ export default {
   },
   data() {
     return {
+      // 控件
+      date1: "2020-06-14",
+      radio1: "最近1天",
     }
 
   },
   // 加载渲染数据
   mounted() {
-    this.load1();
+    this.load1(this.date1, this.getdays(this.radio1));
   },
   methods: {
     // 将响应数据整合成name字段组成的数组
@@ -49,119 +66,127 @@ export default {
       });
       return m;
     },
-    load1()// main1
+    getdays(para) {
+      if (para == "最近1天")
+        return "1";
+      else if (para == "最近7天")
+        return "7";
+      else if (para == "最近30天")
+        return "30";
+    },
+    load1(dt, recent_days)// main1
     {
-        function randomData() {
-          return Math.round(Math.random()*500);
-        }
-        var mydata = [
-          {name: '北京',value: randomData(),value2: randomData() },{name: '天津',value: randomData(),value2: randomData() },
-          {name: '上海',value: randomData(),value2: randomData()},{name: '重庆',value: randomData(),value2: randomData() },
-          {name: '河北',value: randomData(),value2: randomData()},{name: '河南',value: randomData(),value2: randomData() },
-          {name: '云南',value: randomData(),value2: randomData()},{name: '辽宁',value: randomData(),value2: randomData() },
-          {name: '黑龙江',value: randomData(),value2: randomData() },{name: '湖南',value: randomData(),value2: randomData() },
-          {name: '安徽',value: randomData(),value2: randomData() },{name: '山东',value: randomData(),value2: randomData() },
-          {name: '新疆',value: randomData(),value2: randomData() },{name: '江苏',value: randomData(),value2: randomData() },
-          {name: '浙江',value: randomData(),value2: randomData() },{name: '江西',value: randomData(),value2: randomData() },
-          {name: '湖北',value: randomData(),value2: randomData() },{name: '广西',value: randomData(),value2: randomData() },
-          {name: '甘肃',value: randomData(),value2: randomData() },{name: '山西',value: randomData(),value2: randomData() },
-          {name: '内蒙古',value: randomData(),value2: randomData() },{name: '陕西',value: randomData(),value2: randomData() },
-          {name: '吉林',value: randomData(),value2: randomData() },{name: '福建',value: randomData(),value2: randomData() },
-          {name: '贵州',value: randomData(),value2: randomData() },{name: '广东',value: randomData(),value2: randomData() },
-          {name: '青海',value: randomData(),value2: randomData() },{name: '西藏',value: randomData(),value2: randomData() },
-          {name: '四川',value: randomData(),value2: randomData() },{name: '宁夏',value: randomData(),value2: randomData() },
-          {name: '海南',value: randomData(),value2: randomData() },{name: '台湾',value: randomData(),value2: randomData() },
-          {name: '香港',value: randomData(),value2: randomData() },{name: '澳门',value: randomData(),value2: randomData() }
-        ];
-        var option = {
-          backgroundColor: '#FFFFFF',
-          title: {
-            text: '',
-            subtext: '',
-            y: '5%',
-            x:'center'
-          },
-          tooltip : {
-            trigger: 'item',
-            formatter: function (param) {
+      function randomData() {
+        return Math.round(Math.random() * 500);
+      }
+      var mydata = [
+        { name: '北京', value: randomData(), value2: randomData() }, { name: '天津', value: randomData(), value2: randomData() },
+        { name: '上海', value: randomData(), value2: randomData() }, { name: '重庆', value: randomData(), value2: randomData() },
+        { name: '河北', value: randomData(), value2: randomData() }, { name: '河南', value: randomData(), value2: randomData() },
+        { name: '云南', value: randomData(), value2: randomData() }, { name: '辽宁', value: randomData(), value2: randomData() },
+        { name: '黑龙江', value: randomData(), value2: randomData() }, { name: '湖南', value: randomData(), value2: randomData() },
+        { name: '安徽', value: randomData(), value2: randomData() }, { name: '山东', value: randomData(), value2: randomData() },
+        { name: '新疆', value: randomData(), value2: randomData() }, { name: '江苏', value: randomData(), value2: randomData() },
+        { name: '浙江', value: randomData(), value2: randomData() }, { name: '江西', value: randomData(), value2: randomData() },
+        { name: '湖北', value: randomData(), value2: randomData() }, { name: '广西', value: randomData(), value2: randomData() },
+        { name: '甘肃', value: randomData(), value2: randomData() }, { name: '山西', value: randomData(), value2: randomData() },
+        { name: '内蒙古', value: randomData(), value2: randomData() }, { name: '陕西', value: randomData(), value2: randomData() },
+        { name: '吉林', value: randomData(), value2: randomData() }, { name: '福建', value: randomData(), value2: randomData() },
+        { name: '贵州', value: randomData(), value2: randomData() }, { name: '广东', value: randomData(), value2: randomData() },
+        { name: '青海', value: randomData(), value2: randomData() }, { name: '西藏', value: randomData(), value2: randomData() },
+        { name: '四川', value: randomData(), value2: randomData() }, { name: '宁夏', value: randomData(), value2: randomData() },
+        { name: '海南', value: randomData(), value2: randomData() }, { name: '台湾', value: randomData(), value2: randomData() },
+        { name: '香港', value: randomData(), value2: randomData() }, { name: '澳门', value: randomData(), value2: randomData() }
+      ];
+      var option = {
+        backgroundColor: '#FFFFFF',
+        title: {
+          text: '',
+          subtext: '',
+          y: '5%',
+          x: 'center'
+        },
+        tooltip: {
+          trigger: 'item',
+          formatter: function (param) {
             // console.log(param);
-              if (param.data) {
-                return param.marker + param.seriesName + " : " + param.name
-                  + " <br/>  订单数 : " + param.value + " 件"
-                  + " <br/>  订单金额 : " + param.data.value2 + " 元";
-              } else {
-                return null
-              }
+            if (param.data) {
+              return param.marker + param.seriesName + " : " + param.name
+                + " <br/>  订单数 : " + param.value + " 件"
+                + " <br/>  订单金额 : " + param.data.value2 + " 元";
+            } else {
+              return null
+            }
+          }
+        },
+
+        //左侧小导航图标
+        visualMap: {
+          show: true,
+          x: 'left',
+          y: 'center',
+          pieces: [{
+            gt: 400,
+            label: ">400 单",
+            color: "#D22E2E"
+          }, {
+            gt: 300,
+            lt: 400,
+            label: "300-400 单",
+            color: "#ff5428"
+          }, {
+            gt: 200,
+            lt: 300,
+            label: "200-300 单",
+            color: "#ff8c71"
+          }, {
+            gt: 100,
+            lt: 200,
+            label: "100-200 单",
+            color: "#ffa168"
+          }, {
+            lt: 100,
+            label: "<100 单",
+            color: "#FFddaa"
+          }
+          ]
+
+          // 另一种左侧图例
+          // splitList: [
+          //   {start: 500, end:600},{start: 400, end: 500},
+          //   {start: 300, end: 400},{start: 200, end: 300},
+          //   {start: 100, end: 200},{start: 0, end: 100},
+          // ],
+          // color: ['#5475f5', '#9feaa5', '#85daef', '#74e2ca', '#e6ac53', '#9fb5ea'],
+        },
+
+        //配置属性
+        series: [{
+          name: '省份',
+          type: 'map',
+          mapType: 'china',
+          roam: true,
+          label: {
+            normal: {
+              show: true  //省份名称
+            },
+            emphasis: {
+              show: false
             }
           },
-
-          //左侧小导航图标
-          visualMap: {
-            show : true,
-            x: 'left',
-            y: 'center',
-            pieces: [{
-                gt: 400,
-                label: ">400 单",
-                color: "#D22E2E"
-              }, {
-                gt: 300,
-                lt: 400,
-                label: "300-400 单",
-                color: "#ff5428"
-              }, {
-                gt: 200,
-                lt: 300,
-                label: "200-300 单",
-                color: "#ff8c71"
-              },{
-                gt: 100,
-                lt: 200,
-                label: "100-200 单",
-                color: "#ffa168"
-              },{
-                lt: 100,
-                label: "<100 单",
-                color: "#FFddaa"
-              }
-            ]
-
-            // 另一种左侧图例
-            // splitList: [
-            //   {start: 500, end:600},{start: 400, end: 500},
-            //   {start: 300, end: 400},{start: 200, end: 300},
-            //   {start: 100, end: 200},{start: 0, end: 100},
-            // ],
-            // color: ['#5475f5', '#9feaa5', '#85daef', '#74e2ca', '#e6ac53', '#9fb5ea'],
-          },
-
-          //配置属性
-          series: [{
-            name: '省份',
-            type: 'map',
-            mapType: 'china',
-            roam: true,
-            label: {
-              normal: {
-                show: true  //省份名称
-              },
-              emphasis: {
-                show: false
-              }
-            },
-            data:mydata  //数据
-          }]
-        };
-        //初始化echarts实例
-        var chartDom = document.getElementById('main1');
-        var myChart = echarts.init(chartDom);
-        //使用制定的配置项和数据显示图表
-        myChart.setOption(option);
+          data: mydata  //数据
+        }]
+      };
+      //初始化echarts实例
+      var chartDom = document.getElementById('main1');
+      var myChart = echarts.init(chartDom);
+      //使用制定的配置项和数据显示图表
+      myChart.setOption(option);
 
       // 请求数据
       this.request.post(this.ip + "/province", {
-        dt: "2020-06-14",
-        recent_days:"1"
+        dt: dt,
+        recent_days: recent_days
       }).then(res => {
         console.log("请求ip", this.ip + "/province", "成功", res)
         var pn = this.collect(res, 'province_name')
@@ -169,40 +194,46 @@ export default {
         var ot = this.collect(res, 'order_total_amount', 1)
 
         let max = this.get_max(oc);
-        let inter = max / 6;
+        let inter = Math.round(max / 6);
         var pieces = [
           {
-                gt: inter*4,
-                label: ">"+inter*4+" 单",
-                color: "#D22E2E"
-              }, {
-                gt: inter*3,
-                lt: inter*4,
-                label: inter*3+"-"+inter*4 +" 单",
-                color: "#ff5428"
-              }, {
-                gt: inter*2,
-                lt: inter*3,
-                label: inter*2+"-"+inter*3 +" 单",
-                color: "#ff8c71"
-              },{
-                gt: inter,
-                lt: inter*2,
-                label: inter+"-"+inter*2 +" 单",
-                color: "#ffa168"
-              },{
-                lt: inter,
-                label: "<"+inter+" 单",
-                color: "#FFddaa"
-              }]
+            gt: inter * 4,
+            label: ">" + inter * 4 + " 单",
+            color: "#D22E2E"
+          }, {
+            gt: inter * 3,
+            lt: inter * 4,
+            label: inter * 3 + "-" + inter * 4 + " 单",
+            color: "#ff5428"
+          }, {
+            gt: inter * 2,
+            lt: inter * 3,
+            label: inter * 2 + "-" + inter * 3 + " 单",
+            color: "#ff8c71"
+          }, {
+            gt: inter,
+            lt: inter * 2,
+            label: inter + "-" + inter * 2 + " 单",
+            color: "#ffa168"
+          }, {
+            lt: inter,
+            label: "<" + inter + " 单",
+            color: "#FFddaa"
+          }]
         option.visualMap.pieces = pieces;
 
         mydata.forEach(e => {
           e.value = 0;
+          e.value2 = 0;
         });
-        for (let i = 0; i < pn.length; i++){
-          mydata[pn[i].name].value = oc[i];
-          mydata[pn[i].name].value2 = ot[i];
+        for (let i = 0; i < pn.length; i++) {
+          for (let j = 0; j < mydata.length; j++) {
+            if (pn[i] == mydata[j].name) {
+              mydata[j].value = oc[i];
+              mydata[j].value2 = ot[i];
+            }
+
+          }
         }
 
         option.series.data = mydata;
@@ -213,6 +244,16 @@ export default {
         myChart.setOption(option);
 
       })
+    },
+    // 切换统计时间范围
+    checkout_scope() {
+      // console.log(this.radio1);
+      this.load1(this.date1, this.getdays(this.radio1));
+    },
+    // 切换日期
+    checkout_date() {
+      // console.log(this.date1);
+      this.load1(this.date1, this.getdays(this.radio1));
     }
   }
 

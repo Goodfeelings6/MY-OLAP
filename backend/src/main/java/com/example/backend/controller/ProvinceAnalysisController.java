@@ -13,13 +13,12 @@ import java.util.Map;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/province")
 public class ProvinceAnalysisController {
     @Autowired
     private ProvinceService provinceService;
 
-    @PostMapping("/")
-    public List<Map<String, String>> addOrder(@RequestBody Map<String, String> params) {
+    @PostMapping("province")
+    public List<Map<String, String>> province(@RequestBody Map<String, String> params) {
         List<Map<String, String>> list = new ArrayList<>();
         List<OrderByProvince> provinceDetails = provinceService.getProvinceDetails(params.get("dt"),
                 params.get("recent_days"));

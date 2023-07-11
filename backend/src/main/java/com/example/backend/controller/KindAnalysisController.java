@@ -25,9 +25,9 @@ public class KindAnalysisController {
                 params.get("recent_days"));
         for (TradeStatsByCate tradeStatsByCate : orderAdd) {
             HashMap<String, String> map = new HashMap<>();
-            map.put("category1_name", tradeStatsByCate.getCategory1Id());
-            map.put("category2_name", tradeStatsByCate.getCategory2Id());
-            map.put("category3_name", tradeStatsByCate.getCategory3Id());
+            map.put("category1_name", tradeStatsByCate.getCategory1Name());
+            map.put("category2_name", tradeStatsByCate.getCategory2Name());
+            map.put("category3_name", tradeStatsByCate.getCategory3Name());
             map.put("order_count", tradeStatsByCate.getOrderCount());
             map.put("order_user_count", tradeStatsByCate.getOrderUserCount());
             list.add(map);
@@ -41,9 +41,9 @@ public class KindAnalysisController {
                 params.get("recent_days"));
         for (TradeStatsByCate tradeStatsByCate : orderReduce) {
             HashMap<String, String> map = new HashMap<>();
-            map.put("category1_name", tradeStatsByCate.getCategory1Id());
-            map.put("category2_name", tradeStatsByCate.getCategory2Id());
-            map.put("category3_name", tradeStatsByCate.getCategory3Id());
+            map.put("category1_name", tradeStatsByCate.getCategory1Name());
+            map.put("category2_name", tradeStatsByCate.getCategory2Name());
+            map.put("category3_name", tradeStatsByCate.getCategory3Name());
             map.put("order_refund_count", tradeStatsByCate.getOrderRefundCount());
             map.put("order_refund_user_count", tradeStatsByCate.getOrderRefundUserCount());
             list.add(map);

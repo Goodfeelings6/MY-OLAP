@@ -62,28 +62,28 @@
           <el-menu-item index="3-4-1">选项4-1</el-menu-item>
         </el-submenu> -->
       </el-submenu>
-      <el-submenu index="4">
+      <!-- <el-submenu index="4">
         <template slot="title"><i class="el-icon-shopping-cart-full"></i>订单分析</template>
-        <!-- <el-menu-item-group> -->
+        <el-menu-item-group> -->
           <!-- <template slot="title">分组一</template> -->
-          <el-menu-item index="4-1" class="el-icon-link">订单统计</el-menu-item>
-          <el-menu-item index="4-2" class="el-icon-link">退单统计</el-menu-item>
+          <!-- <el-menu-item index="4-1" class="el-icon-link">订单统计</el-menu-item>
+          <el-menu-item index="4-2" class="el-icon-link">退单统计</el-menu-item> -->
         <!-- </el-menu-item-group> -->
-      </el-submenu>
+      <!-- </el-submenu> -->
       <el-submenu index="5">
         <template slot="title"><i class="el-icon-present"></i>优惠劵分析</template>
         <!-- <el-menu-item-group> -->
           <!-- <template slot="title">分组一</template> -->
-          <el-menu-item index="5-1" class="el-icon-link">优惠劵使用率统计</el-menu-item>
-          <el-menu-item index="5-2" class="el-icon-link">优惠劵金额</el-menu-item>
-          <el-menu-item index="5-3" class="el-icon-link">优惠劵补贴率</el-menu-item>
+          <!-- <el-menu-item index="5-1" class="el-icon-link">优惠劵使用率统计</el-menu-item> -->
+          <!-- <el-menu-item index="5-2" class="el-icon-link">优惠劵金额</el-menu-item> -->
+          <el-menu-item index="/data-report/coupon/Discount" class="el-icon-link">优惠劵补贴率</el-menu-item>
         <!-- </el-menu-item-group> -->
       </el-submenu>
       <el-submenu index="6">
         <template slot="title"><i class="el-icon-wind-power"></i>活动分析</template>
         <!-- <el-menu-item-group> -->
           <!-- <template slot="title">分组一</template> -->
-          <el-menu-item index="6-1" class="el-icon-link">活动补贴率</el-menu-item>
+          <el-menu-item index="/data-report/activity/Discount" class="el-icon-link">活动补贴率</el-menu-item>
         <!-- </el-menu-item-group> -->
       </el-submenu>
     </el-menu>

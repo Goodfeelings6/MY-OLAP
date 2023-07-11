@@ -1,6 +1,20 @@
 <template>
-  <div style="display: flex;flex-direction: column; justify-content: center;align-items: center;;height: 100%;">
+  <div style="display: flex;flex-direction: column; justify-content: left;align-items: center;;height: 100%;">
     <!-- <h1>用户留存统计</h1> -->
+    <div style="display: flex;justify-content: space-between;margin-top: 15px;margin-bottom: 30px">
+      <div class="fc" >
+        <el-date-picker v-model="date1" type="date" value-format="yyyy-MM-dd"
+        placeholder="选择日期" :picker-options="pickerOptions" @change="checkout_date">
+        </el-date-picker>
+      </div>
+      <!-- <div class="fc">
+        <el-radio-group v-model="radio1" @change="checkout_scope">
+          <el-radio-button label="最近1天"></el-radio-button>
+          <el-radio-button label="最近7天"></el-radio-button>
+          <el-radio-button label="最近30天"></el-radio-button>
+        </el-radio-group>
+      </div> -->
+    </div>
     <el-row :gutter="20">
       <el-col :span="25">
         <el-card>
@@ -25,11 +39,13 @@ export default {
   },
   data() {
     return {
+      // 控件
+      date1: "2020-06-14",
     }
   },
   // 加载渲染数据
   mounted() {
-    this.load1();
+    this.load1(this.date1);
   },
   methods: {
     // 将响应数据整合成name字段组成的数组
@@ -42,7 +58,7 @@ export default {
       }
       return arr;
     },
-    load1()// main1
+    load1(dt)// main1
     {
       var chartDom = document.getElementById('main1');
       var myChart = echarts.init(chartDom);
@@ -107,7 +123,7 @@ export default {
       option && myChart.setOption(option);
       // 请求数据
       this.request.post(this.ip + "/user/retained", {
-        dt: "2020-06-14",
+        dt: dt,
       }).then(res => {
         console.log("请求ip", this.ip + "/user/retained","成功",res)
         option.xAxis[0].data = this.collect(res, 'dt')
@@ -117,6 +133,11 @@ export default {
         console.log("err_msg:", err)
         console.log("err,请求ip", this.ip+ "/user/retained")
       }) 
+    },
+    // 切换日期
+    checkout_date() {
+      // console.log(this.date1);
+      this.load1(this.date1);
     }
   }
 

@@ -17,14 +17,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, TradeStats> imple
     private OrderMapper orderMapper;
 
     @Override
-    public List<TradeStats> getDayOrderDetails(String dt, String recentDays) {
+    public List<TradeStats> getOrderDetails(String dt, String recentDays) {
         return orderMapper.selectList(new LambdaQueryWrapper<TradeStats>().eq(TradeStats::getDt, dt)
                 .eq(TradeStats::getRecentDays, recentDays));
     }
 
-    @Override
-    public List<TradeStats> getOrderReduce(String dt, String recentDays) {
-        return orderMapper.selectList(new LambdaQueryWrapper<TradeStats>().eq(TradeStats::getDt, dt)
-                .eq(TradeStats::getRecentDays, recentDays));
-    }
 }

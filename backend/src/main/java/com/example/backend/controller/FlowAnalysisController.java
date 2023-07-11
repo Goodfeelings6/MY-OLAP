@@ -1,7 +1,9 @@
 package com.example.backend.controller;
 
+import com.example.backend.entity.PagePath;
 import com.example.backend.entity.TrafficStatusChannel;
 import com.example.backend.service.FlowAnalysisService;
+import com.example.backend.service.FlowPathService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +18,9 @@ import java.util.Map;
 public class FlowAnalysisController {
     @Autowired
     private FlowAnalysisService flowAnalysisService;
+    @Autowired
+    private FlowPathService flowPathService;
+
     @PostMapping("cust_num")
     public List<Map<String, String>> custNum(@RequestBody Map<String, String> params) {
 //        Map<String, String> params = new HashMap<>();
@@ -60,5 +65,17 @@ public class FlowAnalysisController {
         return list;
     }
 
-
+    @PostMapping("path")
+    public List<Map<String, String>> path(@RequestBody Map<String, String> params) {
+        List<Map<String, String>> list = new ArrayList<>();
+        List<PagePath> flowPath = flowPathService.getFlowPath(params.get("dt"), params.get("recent_days"));
+        for (PagePath pagePath : flowPath) {
+            HashMap<String, String> map = new HashMap<>();
+            map.put("source", pagePath.getSource());
+            map.put("target", pagePath.getTarget());
+            map.put("path_count", pagePath.getPathCount());
+            list.add(map);
+        }
+        return list;
+    }
 }

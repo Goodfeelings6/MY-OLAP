@@ -1,6 +1,20 @@
 <template>
-  <div style="display: flex;flex-direction: column; justify-content: center;align-items: center;height: 100%;">
+  <div style="display: flex;flex-direction: column; justify-content: left;align-items: center;height: 100%;">
     <!-- <h1>新增下单用户统计</h1> -->
+    <div style="display: flex;justify-content: space-between;margin-top: 15px;margin-bottom: 30px">
+      <div class="fc" style="margin-right: 400px;">
+        <el-date-picker v-model="date1" type="date" value-format="yyyy-MM-dd"
+        placeholder="选择日期" :picker-options="pickerOptions" @change="checkout_date">
+        </el-date-picker>
+      </div>
+      <div class="fc">
+        <el-radio-group v-model="radio1" @change="checkout_scope">
+          <el-radio-button label="最近1天"></el-radio-button>
+          <el-radio-button label="最近7天"></el-radio-button>
+          <el-radio-button label="最近30天"></el-radio-button>
+        </el-radio-group>
+      </div>
+    </div>
     <el-row :gutter="20">
       <el-col :span="25">
         <el-card>
@@ -25,12 +39,15 @@ export default {
   },
   data() {
     return {
+      // 控件
+      date1: "2020-06-14",
+      radio1: "最近1天"
     }
 
   },
   // 加载渲染数据
   mounted() {
-    this.load1();
+    this.load1(this.date1, this.getdays(this.radio1));
   },
   methods: {
     // 将响应数据整合成name字段组成的数组
@@ -50,7 +67,15 @@ export default {
       });
       return m;
     },
-    load1()// main1
+    getdays(para) {
+      if (para == "最近1天")
+        return "1";
+      else if (para == "最近7天")
+        return "7";
+      else if (para == "最近30天")
+        return "30";
+    },
+    load1(dt,recent_days)// main1
     {
       var chartDom = document.getElementById('main1');
       var myChart = echarts.init(chartDom);
@@ -140,8 +165,8 @@ export default {
 
       // 请求数据
       this.request.post(this.ip + "/user/order", {
-        dt: "2020-06-14",
-        recent_days:"1"
+        dt: dt,
+        recent_days:recent_days
       }).then(res => {
         console.log("请求ip", this.ip + "/user/order", "成功", res)
         option.xAxis[0].data = this.collect(res, 'dt')
@@ -162,6 +187,16 @@ export default {
         console.log("err_msg:", err)
         console.log("err,请求ip", this.ip + "/user/order")
       })
+    },
+        // 切换统计时间范围
+        checkout_scope() {
+      // console.log(this.radio1);
+      this.load1(this.date1, this.getdays(this.radio1));
+    },
+    // 切换日期
+    checkout_date() {
+      // console.log(this.date1);
+      this.load1(this.date1, this.getdays(this.radio1));
     }
   }
 

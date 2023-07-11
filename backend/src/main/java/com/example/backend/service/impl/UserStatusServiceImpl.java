@@ -33,6 +33,6 @@ public class UserStatusServiceImpl extends ServiceImpl<UserStatusMapper, UserSta
         String newDateString = newDate.format(formatter);
 
         return userStatusMapper.selectList(new LambdaQueryWrapper<UserStats>()
-                .between(UserStats::getDt, newDateString, dt).eq(UserStats::getRecentDays, recentDays));
+                .gt(UserStats::getDt, newDateString).le(UserStats::getDt, dt).eq(UserStats::getRecentDays, recentDays));
     }
 }

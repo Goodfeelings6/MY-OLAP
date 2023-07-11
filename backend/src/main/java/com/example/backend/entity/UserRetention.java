@@ -19,8 +19,8 @@ public class UserRetention {
     @TableField("retention_count")
     private String retentionCount;
 
-    @TableField("newUserCount")
-    private String avgDurationSec;
+    @TableField("new_user_count")
+    private String newUserCount;
 
     @TableField("retention_rate")
     private String retentionRate;

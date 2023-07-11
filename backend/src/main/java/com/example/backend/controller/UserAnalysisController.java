@@ -58,6 +58,7 @@ public class UserAnalysisController {
         List<UserStats> activeCount = userStatusService.getActiveCount(params.get("dt"), params.get("recent_days"));
         for (UserStats userStats : activeCount) {
             HashMap<String, String> map = new HashMap<>();
+            map.put("dt", userStats.getDt());
             map.put("new_user_count", userStats.getNewUserCount());
             map.put("active_user_count", userStats.getActiveUserCount());
             list.add(map);
@@ -87,6 +88,7 @@ public class UserAnalysisController {
         List<NewBuyerStats> orderDetails = userOrderService.getOrderDetails(params.get("dt"), params.get("recent_days"));
         for (NewBuyerStats newBuyerStats : orderDetails) {
             HashMap<String, String> map = new HashMap<>();
+            map.put("dt", newBuyerStats.getDt());
             map.put("new_order_user_count", newBuyerStats.getNewOrderUserCount());
             map.put("new_payment_user_count", newBuyerStats.getNewPaymentUserCount());
             list.add(map);

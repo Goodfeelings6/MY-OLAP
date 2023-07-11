@@ -5,22 +5,19 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 @Data
-@TableName("ads_coupon_stats")
+@TableName("ads_activity_stats")
 public class ActivityStats {
     @TableField("dt")
     private String dt;
 
-    @TableField("coupon_id")
-    private String couponId;
+    @TableField("activity_id")
+    private String activityId;
 
-    @TableField("coupon_name")
-    private String couponName;
+    @TableField("activity_name")
+    private String activityName;
 
     @TableField("start_date")
     private String startDate;
-
-    @TableField("rule_name")
-    private String ruleName;
 
     @TableField("reduce_rate")
     private String reduceRate;

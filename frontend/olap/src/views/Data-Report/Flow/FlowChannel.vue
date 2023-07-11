@@ -1,6 +1,20 @@
 <template>
   <div class="fc" style="flex-direction: column;gap: 25px;">
     <h1 style="font-size: 20px;">各渠道流量统计</h1>
+    <div style="display: flex;justify-content: space-between;margin-bottom: 5px">
+      <div class="fc" style="margin-right: 400px;">
+        <el-date-picker v-model="date1" type="date" value-format="yyyy-MM-dd"
+        placeholder="选择日期" :picker-options="pickerOptions" @change="checkout_date">
+        </el-date-picker>
+      </div>
+      <div class="fc">
+        <el-radio-group v-model="radio1" @change="checkout_scope">
+          <el-radio-button label="最近1天"></el-radio-button>
+          <el-radio-button label="最近7天"></el-radio-button>
+          <el-radio-button label="最近30天"></el-radio-button>
+        </el-radio-group>
+      </div>
+    </div>
     <el-row :gutter="20">
       <el-col :span="24">
         <el-card class="fc">
@@ -8,6 +22,9 @@
             <b style="font-size: 15px;">各渠道独立访客数</b>
           </div>
           <div id="main1" style="width: 800px;height:350px;"></div>
+          <div class="fc" style="margin-top: -30px;">
+            <b style="font-size: 15px;color: rgb(96, 96, 97);">渠道</b>
+          </div>
         </el-card>
       </el-col>
     </el-row>
@@ -18,6 +35,9 @@
             <b style="font-size: 15px;">各渠道会话统计</b>
           </div>
           <div id="main2" style="width: 1200px;height:500px;"></div>
+          <div class="fc" style="margin-top: -30px;">
+            <b style="font-size: 15px;color: rgb(96, 96, 97);">渠道</b>
+          </div>
         </el-card>
       </el-col>
     </el-row>
@@ -28,6 +48,9 @@
             <b style="font-size: 15px;">各渠道跳出率</b>
           </div>
           <div id="main3" style="width: 800px;height:500px;"></div>
+          <div class="fc" style="margin-top: -30px;">
+            <b style="font-size: 15px;color: rgb(96, 96, 97);">渠道</b>
+          </div>
         </el-card>
       </el-col>
     </el-row>
@@ -42,7 +65,9 @@ export default {
   },
   data() {
     return {
-
+      // 控件
+      date1: "2020-06-14",
+      radio1: "最近1天",
     }
   },
   methods: {
@@ -56,7 +81,15 @@ export default {
       }
       return arr;
     },
-    load1()// main1
+    getdays(para) {
+      if (para == "最近1天")
+        return "1";
+      else if (para == "最近7天")
+        return "7";
+      else if (para == "最近30天")
+        return "30";
+    },
+    load1(dt, recent_days)// main1
     {
       var app = {};
       var chartDom = document.getElementById('main1');
@@ -192,8 +225,8 @@ export default {
       option && myChart.setOption(option);
       // 请求数据
       this.request.post(this.ip + "/flow/cust_num", {
-        dt: "2020-06-14",
-        recent_days: "1"
+        dt: dt,
+        recent_days: recent_days
       }).then(res => {
         console.log("请求ip", this.ip + "/flow/cust_num","成功",res)
         option.xAxis[0].data = this.collect(res, 'channel')
@@ -204,7 +237,7 @@ export default {
         console.log("err,请求ip", this.ip+ "/flow/cust_num")
       })
     },
-    load2()// main2
+    load2(dt, recent_days)// main2
     {
       var chartDom = document.getElementById('main2');
       var myChart = echarts.init(chartDom);
@@ -313,8 +346,8 @@ export default {
       option && myChart.setOption(option);
       // 请求数据
       this.request.post(this.ip + "/flow/session", {
-        dt: "2020-06-14",
-        recent_days: "1"
+        dt: dt,
+        recent_days: recent_days
       }).then(res => {
         console.log("请求ip", this.ip + "/flow/jump","成功",res)
         option.xAxis[0].data = this.collect(res, 'channel')
@@ -327,7 +360,7 @@ export default {
         console.log("err,请求ip", this.ip+ "/flow/session")
       })
     },
-    load3()// main3
+    load3(dt, recent_days)// main3
     {
       var app = {};
       var chartDom = document.getElementById('main3');
@@ -463,8 +496,8 @@ export default {
       option && myChart.setOption(option);
       // 请求数据
       this.request.post(this.ip + "/flow/jump", {
-        dt: "2020-06-14",
-        recent_days: "1"
+        dt: dt,
+        recent_days: recent_days
       }).then(res => {
         console.log("请求ip", this.ip + "/flow/jump","成功",res)
         option.xAxis[0].data = this.collect(res, 'channel')
@@ -474,12 +507,26 @@ export default {
         console.log("err_msg:",err)
         console.log("err,请求ip", this.ip + "/flow/jump")
       })
+    },
+    // 切换统计时间范围
+    checkout_scope() {
+      // console.log(this.radio1);
+      this.load1(this.date1, this.getdays(this.radio1));
+      this.load2(this.date1, this.getdays(this.radio1));
+      this.load3(this.date1, this.getdays(this.radio1));
+    },
+    // 切换日期
+    checkout_date() {
+      // console.log(this.date1);
+      this.load1(this.date1, this.getdays(this.radio1));
+      this.load2(this.date1, this.getdays(this.radio1));
+      this.load3(this.date1, this.getdays(this.radio1));
     }
   },
   mounted() {
-    this.load1();
-    this.load2();
-    this.load3();
+    this.load1(this.date1, this.getdays(this.radio1));
+    this.load2(this.date1, this.getdays(this.radio1));
+    this.load3(this.date1, this.getdays(this.radio1));
   }
 }
 </script>

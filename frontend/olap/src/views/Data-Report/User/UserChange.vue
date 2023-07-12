@@ -180,7 +180,13 @@ export default {
       this.request.post(this.ip + "/user/change", {
         dt: dt,
       }).then(res => {
-        console.log("请求ip", this.ip + "/user/change","成功",res)
+        console.log("请求ip", this.ip + "/user/change", "成功", res)
+        // 按时间排序
+        res.sort((a, b) => {
+          if (a.dt < b.dt) return -1;
+          else if (a.dt == b.dt) return 0;
+          else return 1;
+        })
         option.xAxis[0].data = this.collect(res, 'dt')
         option.series[0].data = this.collect(res, 'user_churn_count', 1)
         option.series[1].data = this.collect(res, 'user_back_count', 1)

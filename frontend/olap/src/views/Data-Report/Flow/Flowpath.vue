@@ -88,6 +88,9 @@ export default {
       var nodes = []
       var links = []
       res.forEach(obj => {
+        if (obj.target === null) {
+          obj.target = "exit"
+        }
         var link = {}
         link.source = obj.source;
         link.target = obj.target;
@@ -108,8 +111,8 @@ export default {
         }
       }
 
-      console.log(nodes);
-      console.log(links);
+      // console.log(nodes);
+      // console.log(links);
 
       option.series[0].data = nodes;
       option.series[0].links = links;

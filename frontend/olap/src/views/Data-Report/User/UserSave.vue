@@ -125,7 +125,8 @@ export default {
       this.request.post(this.ip + "/user/retained", {
         dt: dt,
       }).then(res => {
-        console.log("请求ip", this.ip + "/user/retained","成功",res)
+        console.log("请求ip", this.ip + "/user/retained", "成功", res)
+        
         option.xAxis[0].data = this.collect(res, 'dt')
         option.series[0].data = this.collect(res, 'retention_rate', 1)
         myChart.setOption(option);

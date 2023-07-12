@@ -60,9 +60,12 @@ export default {
 
     watch: {
         $route(to, from) {
-            // console.log(from.path);//从哪来
-            // console.log(to.path);//到哪去
-            this.activeIndex = to.path
+            console.log(from.path);//从哪来
+            console.log(to.path);//到哪去
+            if(to.path.split('/').length>3)
+                this.activeIndex = "/data-report/outline"
+            else
+                this.activeIndex = to.path
         }
     }
 }

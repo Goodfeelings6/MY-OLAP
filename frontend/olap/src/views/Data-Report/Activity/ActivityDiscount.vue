@@ -72,7 +72,7 @@ export default {
       var option;
 
       option = {
-        color: ["#aaff50"],
+        color: ["#aacc50"],
         tooltip: {
           trigger: 'axis',
           formatter: function (param) {

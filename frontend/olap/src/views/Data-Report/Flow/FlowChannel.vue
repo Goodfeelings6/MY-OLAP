@@ -243,7 +243,7 @@ export default {
       var myChart = echarts.init(chartDom);
       var option;
 
-      const colors = ['#11ffff', '#67C23A', '#EE6666'];
+      const colors = ['#11aaff', '#67cc3A',, '#EE6666'];
       option = {
         color: colors,
         tooltip: {

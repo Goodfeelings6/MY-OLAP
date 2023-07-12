@@ -2,6 +2,10 @@
   <div>
     <el-tabs type="border-card">
       <el-tab-pane>
+        <span slot="label"><i class="el-icon-s-goods"></i> 商品推荐</span>
+        <ShopRecommend></ShopRecommend>
+      </el-tab-pane>
+      <el-tab-pane>
         <span slot="label"><i class="el-icon-date"></i> 转化漏斗在线分析</span>
         <el-form :model="dynamicValidateForm" ref="dynamicValidateForm" label-width="100px" class="demo-dynamic"
           style="width: 50%;">
@@ -53,8 +57,12 @@
   
 <script>
 import * as echarts from 'echarts';
+import ShopRecommend from '@/components/ShopRecommend.vue'
 export default {
   name: 'Analysis',
+  components: {
+    ShopRecommend
+  },
   props: {
   },
   data() {

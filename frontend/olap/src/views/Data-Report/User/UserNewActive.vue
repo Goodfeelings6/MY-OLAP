@@ -117,7 +117,7 @@ export default {
             name: '新增用户数',
             min: 0,
             max: 250,
-            interval: 5,
+            interval: 30,
             axisLabel: {
               formatter: '{value} 人'
             }
@@ -169,6 +169,14 @@ export default {
         recent_days:recent_days
       }).then(res => {
         console.log("请求ip", this.ip + "/user/active", "成功", res)
+
+        // 按 dt 升序
+        res.sort((a, b) => {
+          if (a.dt < b.dt) return -1;
+          else if (a.dt == b.dt) return 0;
+          else return 1;
+        })
+
         option.xAxis[0].data = this.collect(res, 'dt')
         option.series[0].data = this.collect(res, 'new_user_count', 1)
         option.series[1].data = this.collect(res, 'active_user_count', 1)
@@ -178,11 +186,11 @@ export default {
         option.yAxis[1].interval = option.yAxis[1].max / 8
         myChart.setOption(option);
       }).catch(err => {
-        option.yAxis[0].max = this.get_max(option.series[0].data) * 2
-        option.yAxis[1].max = this.get_max(option.series[1].data) * 2
-        option.yAxis[0].interval = option.yAxis[0].max / 8
-        option.yAxis[1].interval = option.yAxis[1].max / 8
-        myChart.setOption(option);
+        // option.yAxis[0].max = this.get_max(option.series[0].data) * 2
+        // option.yAxis[1].max = this.get_max(option.series[1].data) * 2
+        // option.yAxis[0].interval = option.yAxis[0].max / 8
+        // option.yAxis[1].interval = option.yAxis[1].max / 8
+        // myChart.setOption(option);
 
         console.log("err_msg:", err)
         console.log("err,请求ip", this.ip + "/user/active")

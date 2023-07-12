@@ -40,6 +40,9 @@ export default {
     // return {
     //   tableData: Array(10).fill(item)
     // }
+    return {
+      
+    }
   }
 }
 </script>

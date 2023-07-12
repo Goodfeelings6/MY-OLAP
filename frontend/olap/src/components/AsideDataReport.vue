@@ -53,8 +53,8 @@
           <el-menu-item index="/data-report/shop/KindReduceOrder" class="el-icon-link">各品类商品退单统计</el-menu-item>
         </el-menu-item-group>
         <el-menu-item-group title="其他">
-          <el-menu-item index="/data-report/shop/" class="el-icon-link">SPU订单统计</el-menu-item>
-          <el-menu-item index="/data-report/shop/" class="el-icon-link">购物车存量统计</el-menu-item>
+          <!-- <el-menu-item index="/data-report/shop/" class="el-icon-link">SPU订单统计</el-menu-item> -->
+          <!-- <el-menu-item index="/data-report/shop/" class="el-icon-link">购物车存量统计</el-menu-item> -->
           <el-menu-item index="/data-report/shop/Province" class="el-icon-link">各省份交易统计</el-menu-item>
         </el-menu-item-group>
         <!-- <el-submenu index="3-4">
@@ -98,7 +98,7 @@ export default {
   },
   data() {
     return {
-      activeIndex: "0" // 当前激活的菜单栏
+      activeIndex: "/data-report/outline" // 当前激活的菜单栏
     };
   },
   methods: {

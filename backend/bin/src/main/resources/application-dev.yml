@@ -1,0 +1,13 @@
+server:
+  port: 8800
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: org.apache.hive.jdbc.HiveDriver
+    url: jdbc:hive2://m35412100x.zicp.fun:43687/gmall?metastore.client.socket.timeout=1800&hive.server.read.socket.timeout=1800&hive.server.write.socket.timeout=1800&hive.server.thrift.socket.timeout=1800&hive.client.thrift.socket.timeout=1800
+    username: root
+    password: 123456
+
+mybatis-plus:
+  configuration:
+    default-statement-timeout: 1800

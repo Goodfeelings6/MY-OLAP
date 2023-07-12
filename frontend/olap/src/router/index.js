@@ -10,20 +10,21 @@ const routes = [
     name: 'OLAP-System',
     redirect:'/data-report/outline',
   },
+  // 报表 
   {
-    // 报表 
     path: '/data-report',
-    name: 'Data-Report',
+    name: 'Manage',
     component: () => import('../views/Data-Report.vue'),
+    redirect:'/data-report/outline',
     children: [
+      // 报表 / 概览
       {
-        // 报表 / 概览
         path: 'outline',
         name: 'Outline',
         component: () => import('../views/Data-Report/Outline.vue'),
       },
+      // 报表 / 用户主题
       {
-        // 报表 / 用户主题
         path: 'user',
         name: 'User',
         component: () => import('../views/Data-Report/User.vue'),
@@ -56,8 +57,8 @@ const routes = [
           }
         ]
       } ,
+      // 报表 / 流量主题
       {
-        // 报表 / 流量主题
         path: 'flow',
         name: 'Flow',
         component: () => import('../views/Data-Report/Flow.vue'),
@@ -75,8 +76,8 @@ const routes = [
           }
         ]
       },
+      // 报表 / 商品主题
       {
-        // 报表 / 商品主题
         path: 'shop',
         name: 'Shop',
         component: () => import('../views/Data-Report/Shop.vue'),
@@ -114,8 +115,8 @@ const routes = [
           }
         ]
       },
+      // 报表 / 优惠劵主题
       {
-        // 报表 / 优惠劵主题
         path: 'coupon',
         name: 'Coupon',
         component: () => import('../views/Data-Report/Coupon.vue'),
@@ -128,8 +129,8 @@ const routes = [
           }
         ]
       } ,
+      // 报表 / 活动主题
       {
-        // 报表 / 活动主题
         path: 'activity',
         name: 'Activity',
         component: () => import('../views/Data-Report/Activity.vue'),
@@ -141,21 +142,25 @@ const routes = [
             component: () => import('../views/Data-Report/Activity/ActivityDiscount.vue')
           }
         ]
+      }  ,
+      // 情感分析
+      {
+        path: 'emo',
+        name: 'Emo',
+        component: () => import('../views/Emo.vue'),
+      }   ,
+      // 联机分析
+      {
+        path: 'analysis',
+        name: 'Analysis',
+        component: () => import('../views/Analysis.vue'),
       } 
     ]
   }
-  // { 用户画像 
-  //   path: '/about',
-  //   name: 'about',
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  // }
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  // mode: 'history',
   base: process.env.BASE_URL,
   routes
 })

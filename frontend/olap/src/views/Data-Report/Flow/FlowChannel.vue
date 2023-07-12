@@ -4,7 +4,7 @@
     <div style="display: flex;justify-content: space-between;margin-bottom: 5px">
       <div class="fc" style="margin-right: 400px;">
         <el-date-picker v-model="date1" type="date" value-format="yyyy-MM-dd"
-        placeholder="选择日期" :picker-options="pickerOptions" @change="checkout_date">
+        placeholder="选择日期"  @change="checkout_date">
         </el-date-picker>
       </div>
       <div class="fc">
